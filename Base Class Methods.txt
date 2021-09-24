@@ -1,0 +1,265 @@
+public static WebDriver driver;
+
+	public static WebDriver getDriver(String broswername) {
+
+		if (broswername.equalsIgnoreCase("chrome")) {
+			System.setProperty("webdriver.chrome.driver",
+					"C:\\Users\\ANBARUVI\\eclipse-workspace\\Sample_Live_Project\\Drivers\\chromedriver.exe");
+
+			driver = new ChromeDriver();
+
+		} else if (broswername.equalsIgnoreCase("firefox")) {
+
+			System.setProperty("webdriver.gecko.driver",
+					"C:\\Users\\ANBARUVI\\eclipse-workspace\\Sample_Live_Project\\Drivers\\geckodriver.exe");
+			driver = new FirefoxDriver();
+
+		} else if (broswername.equalsIgnoreCase("IE")) {
+			System.setProperty("webdriver.ie.driver",
+					"C:\\Users\\ANBARUVI\\eclipse-workspace\\Sample_Live_Project\\Drivers\\IEDriverServer.exe");
+			driver = new InternetExplorerDriver();
+		}
+
+		return driver;
+	}
+
+	// get
+	public static void launchUrl(String url) {
+		driver.get(url);
+
+	}
+
+	// close
+	public static void close() {
+		driver.close();
+
+	}
+
+	// quit
+	public static void quit() {
+		driver.quit();
+
+	}
+
+	// navigate to
+	public static void navigateTo(String urlname) {
+		driver.navigate().to(urlname);
+
+	}
+
+	// navigateBack
+	public static void navigateBack() {
+
+		driver.navigate().back();
+	}
+
+	// navigateFoward
+	public static void navigateForward() {
+		driver.navigate().forward();
+
+	}
+
+	// Refresh
+	public static void refresh() {
+		driver.navigate().refresh();
+
+	}
+
+	// click
+	public static void click(WebElement element) {
+		element.click();
+
+	}
+
+	// sendkeys
+	public static void enterValue(WebElement element, String value) {
+		element.sendKeys(value);
+
+	}
+
+	// Alert
+	public static void alert() {
+		Alert al = driver.switchTo().alert();
+		al.accept();
+
+	}
+
+	// Actions-->Mouse Actions
+	
+	public static void actions(WebElement element) {
+		Actions a = new Actions(driver);
+		
+		a.moveToElement(element).build().perform();
+		// a.sendKeys(element, Keys.ENTER).perform();
+
+	}
+
+	// Frame
+	public static void iframe(WebElement element) {
+		driver.switchTo().frame(element);
+	}
+
+	// Robot Class--->Keyboard Actions
+	public static void keyBoard(WebElement element) throws Throwable {
+		Actions ac = new Actions(driver);
+		ac.moveToElement(element).build().perform();
+		Robot r = new Robot();
+		r.keyPress(KeyEvent.VK_DOWN);
+		r.keyRelease(KeyEvent.VK_DOWN);
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);
+	}
+
+	// Screenshot --->Full
+	public static void screenshots(String name) throws Throwable {
+		TakesScreenshot t = (TakesScreenshot) driver;
+		File scr = t.getScreenshotAs(OutputType.FILE);
+		File des = new File(".\\Sample_Live_Project\\Screenshots" + name + ".png");
+		FileUtils.copyFile(scr, des);
+	}
+
+	// Particular Screenshot ---> Particular Element
+	public static void elementscreenshot(WebElement element, String name) throws Throwable {
+		File scr = element.getScreenshotAs(OutputType.FILE);
+		File des = new File(".\\Sample_Live_Project\\Screenshots" + name + ".png");
+		FileUtils.copyFile(scr, des);
+	}
+
+	// DropDown
+	public static void dropDown(WebElement element, String name) {
+		Select s = new Select(element);
+		s.selectByValue(name);
+		// s.getFirstSelectedOption();
+		// s.getOptions();
+		// s.getAllSelectedOptions();
+		// s.selectByIndex(name);
+		// s.selectByVisibleText(name);
+	}
+
+	// isMutiple --> to check the selection is mutiple select
+	public static void isMultiple(WebElement element) {
+		Select s = new Select(element);
+		s.isMultiple();
+
+	}
+
+	// wait --> helps to wait to complete of appropriate action
+	// implicit wait tells the webpage to wait for certain amount of time
+	public static void implicitWaits(long value, TimeUnit timeinseconds) {
+		driver.manage().timeouts().implicitlyWait(value, timeinseconds);
+
+	}
+
+	// ExpliciWait --> helps to wait an particular element to certain condition
+	public static void explicitWait(WebElement element, long time) {
+		WebDriverWait wait = new WebDriverWait(driver, time);
+		wait.until(ExpectedConditions.visibilityOf(element));
+
+	}
+
+	// scrolldown using hegiht of the page
+	public static void scrollUpandDown() {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0,400);");
+
+	}
+
+	// Threadsleep
+	public static void threadsleep(long value) throws Throwable {
+		Thread.sleep(value);
+
+	}
+
+	// isDisplayed --> used to check the particular element displays
+	public static void isDisplayed(WebElement element) {
+		element.isDisplayed();
+	}
+
+	// isEnabled --> used to check particular text box enable to enter value or to
+	// sendkeys
+	public static void isEnabled(WebElement element) {
+		element.isEnabled();
+	}
+
+	// isSelected --> used to check particular radio button or check box is selected
+	// or not
+	public static void isSelected(WebElement element) {
+		element.isSelected();
+
+	}
+
+	// getTitle ---> used to print the title of the page
+	public static void getTitle() {
+		driver.getTitle();
+
+	}
+
+	// getCurrrentUrl --> used to print the current Url of the page
+	public static void getCurrentUrl() {
+		driver.getCurrentUrl();
+
+	}
+
+	// getText --> used to print value of particular text box
+	public static void getText(WebElement element) {
+		element.getText();
+
+	}
+
+	// getAttribute --> used to print value of particular text box
+	public static void getAttribute(WebElement element, String name) {
+		element.getAttribute(name);
+
+	}
+
+}
+
+data drvier sample file
+
+ /* public Map<Object, Object> excelloadData(String filename, String sheetname) throws Throwable
+	  { Map<Object, Object> userdetails = new HashMap<Object, Object>(); 
+	  Sheet  sheet = excelfile(filename, sheetname); 
+	  for (int i = 1; i <sheet.getLastRowNum(); i++) { 
+		  Row row = sheet.getRow(i); 
+		  for (int j = 0; j <sheet.getRow(i).getLastCellNum(); j++) 
+		  { Cell cell = row.getCell(j); 
+		  if(sheet.getRow(0).getCell(j).getStringCellValue().equals("username")) {
+	  userdetails.put("username"+i, cell.getStringCellValue());
+	  
+	  }else if (sheet.getRow(0).getCell(j).getStringCellValue().equals("pass")) {
+		userdetails.put("pass"+i, cell.getStringCellValue());
+	}
+	  
+	 
+	  }
+	  
+	  }
+	  
+	  return userdetails;
+	 }*/
+
+
+
+
+
+@Test(dataProvider = "OpenLogin")
+	public  void opencart(String username, String userpass) throws Throwable {
+		driver.get(pro.getProperty("web"));
+		OpenCart_Login_Page op = new OpenCart_Login_Page(driver);
+		entervalue(op.getUseremail(), username);
+		entervalue(op.getUserpassword(), userpass);
+		clickOnElement(op.getSubmit());
+		screenshots("opencart");
+		
+		
+	}
+	
+	@DataProvider(name = "OpenLogin")
+	private Object[][] userdata() {
+	  return new Object[][] {
+	  {"rajkamal@gmail.com","rajkamal@21"},{"gokulkumar123@gmail.com",
+	  "gokul@12345"} }; }
+	 
+	
+
+(//div[@class='614ad9bdff943f576e38e5c9 css-17quusp en1fyme1']/descendant::img)[2]
