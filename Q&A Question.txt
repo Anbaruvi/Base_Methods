@@ -1,0 +1,72 @@
+
+
+
+How do you find the number of references pointing to a particular object?
+The getrefcount() function in the sys module gives the number of references pointing to a particular object including its own
+reference.
+import sys
+x = "JohnShekar"
+y = x
+print(sys.getrefcount(x))
+Here, the object ‘JohnShekar’ is referred by x, y and getrefcount() function itself. So the output is 3.
+
+22) What is List in Python?
+The List is one of the built-in data structures in Python. Lists are used to store an ordered collection of items, which can be of
+different type
+
+When do you choose a list over a tuple?
+When there is an immutable ordered list of elements, we choose tuple. Because we cannot add/remove an element from the
+tuple. On the other hand, we can add elements to a list using append () or extend() or insert(), etc., and delete elements from a
+list using remove() or pop().
+Simple tuples are immutable, and lists are not. Based on these properties one can decide what to choose in their
+programming context.
+
+How do you get the last value in a list or a tuple?
+When we pass -1 to the index operator of the list or tuple, it returns the last value. If -2 is passed, it returns the last but one
+value.
+Example:
+a = [1,2,3,4] #List
+print(a[-1])#4
+
+What is slice notation in Python to access elements in an iterator?
+In Python, to access more than one element from a list or a tuple we can use ‘:’ operator. Here is the syntax. Say ‘a’ is list
+a[startindex:EndIndex:Step]
+Example:
+a = [100,200,300,400,500,600,700,800]
+print(a[3:]) # Prints the values from index 3 till the end [400, 500, 600, 700, 800]
+print(a[3:6])#Prints the values from index 3 to index 6. [400, 500, 600]
+print(a[2::2])#Prints the values from index 2 till the end of the list with step count 2. [300, 500, 700]
+
+How do you convert a list of integers to a comma separated string?
+List elements can be turned into a string using join function.
+a = [1,2,3,4,5,6,7,8]
+print(a)
+numbers = ','.join(str(i) for i in a)
+print(numbers)
+
+What is the difference between Python append () and extend () functions?
+The extend() function takes an iterable (list or tuple or set) and adds each element of the iterable to the list. Whereas append
+takes a value and adds to the list as a single object.
+Example:
+a = [1,2,3,4,5]
+b = [6,7,8]
+a.extend(b)
+print(a)#[1, 2, 3, 4, 5, 6, 7, 8]
+c = ['a','b']
+a.append(c)
+print(a) #[1, 2, 3, 4, 5, 6, 7, 8, ['a', 'b']]
+
+How do you create a list which is a reverse version on another list in Python?
+Python provides a function called reversed(), which will return a reversed iterator. Then, one can use a list constructor over it
+to get a list.
+Example:
+a =[10,20,30,40,50]
+print(a)
+b = list(reversed(a))#[10, 20, 30, 40, 50]
+print(b) #[50, 40, 30, 20, 10]
+
+names = [‘john’, ‘fan’, ‘sam’, ‘megha’, ‘popoye’, ’tom’, ‘jane’, ‘james’,’tony’]
+Write one line of code to get a list of names that start with character ‘j’?
+names = ['john', 'fan', 'sam', 'megha', 'popoye', 'tom', 'jane', 'james', 'tony']
+jnames=[name for name in names if name[0] == 'j'] #One line code to filter names that start with ‘j’
+print(jnames)
